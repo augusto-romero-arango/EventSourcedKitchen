@@ -42,10 +42,7 @@ Se podrían ejecutar `eventStore.GuardarCambios()` directamente en el comando, p
 
 ### CommandRouter
 
-
 Para evitar que en agregados que invoquen varios comandos, se realice un guardado en la base de datos por cada comando, se puede usar el `CommandRouter`
-
-
 
 ### Crear la clase que va a ser nuestro agregado
 
