@@ -1,4 +1,6 @@
-﻿namespace Kitchen.Dominio.HuevosPericos;
+﻿using Kitchen.Dominio.HuevosPericos.Comandos;
+
+namespace Kitchen.Dominio.HuevosPericos;
 
 public class HuevoPerico: AggregateRoot
 {

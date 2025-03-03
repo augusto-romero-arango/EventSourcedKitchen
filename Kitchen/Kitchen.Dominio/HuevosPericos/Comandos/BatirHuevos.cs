@@ -1,4 +1,4 @@
-﻿namespace Kitchen.Dominio.HuevosPericos;
+﻿namespace Kitchen.Dominio.HuevosPericos.Comandos;
 
 public record BatirHuevos(Guid IdHuevoPerico, int CantidadHuevos);
 

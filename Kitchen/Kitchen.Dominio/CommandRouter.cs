@@ -1,4 +1,5 @@
 ﻿using Kitchen.Dominio.HuevosPericos;
+using Kitchen.Dominio.HuevosPericos.Comandos;
 
 namespace Kitchen.Dominio;
 
