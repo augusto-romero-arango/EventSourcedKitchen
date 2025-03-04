@@ -2,6 +2,15 @@
 
 Ejemplo con C# y event sourcing
 
+## Cocinita: Contexto del ejercicio
+
+[MIRO](https://miro.com/app/board/uXjVIWSuopc=/?share_link_id=671970103168)
+![EventStorming de la cocina](Assets/img/eventStorming.png)
+
+Tenemos la solución para hacer una cocina. En este momento, el único producto que hacemos el preparar huevos pericos.
+
+En el diagrama podemos ver los eventos descubiertos por nuestros expertos cocineros, los cuales vamos a modelar.
+
 ## 1. Construir el dominio del problema
 
 ### Crear la clase base de los agregados

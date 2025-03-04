@@ -7,11 +7,10 @@ public class BatirHuevosHandler(IEventStore eventStore) : CommandHandler<BatirHu
     public override void Handle(BatirHuevos comando)
     {
         var huevoPericoStream = ObtenerStream<HuevoPerico>(comando.IdHuevoPerico);
-        var huevoPerico = huevoPericoStream.ObtenerEntidad();
+        _ = huevoPericoStream.CargarEntidad();
         
         huevoPericoStream.Agregar(new HuevosBatidos(comando.IdHuevoPerico, comando.CantidadHuevos));
         
         
-        eventStore.GuardarCambios();
     }
 }

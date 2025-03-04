@@ -8,7 +8,7 @@ public class EventStream<TEntidad>(IEventStore eventStore, Guid aggregateId)
     /// Obtiene la entidad en el estado actual, aplicándole todos los eventos registrados hasta el momento
     /// </summary>
     /// <returns></returns>
-    public TEntidad ObtenerEntidad()
+    public TEntidad CargarEntidad()
     {
         var eventos = eventStore.ObtenerEventos(aggregateId);
         TEntidad entidad = new();
@@ -17,7 +17,7 @@ public class EventStream<TEntidad>(IEventStore eventStore, Guid aggregateId)
         // De esta manera no tomará el constructor vacío de AggregateRoot
         foreach (var evento in eventos)
         {
-            entidad.Apply((dynamic) evento.EventData);
+            entidad.Apply((dynamic)evento.EventData);
             _ultimoNumeroDeSecuencia = evento.SequenceNumber;
         }
         
