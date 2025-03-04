@@ -9,6 +9,6 @@ public class CocinarHuevoPericoHandler(IEventStore eventStore) : CommandHandler<
         var huevoPericoStream = ObtenerStream<HuevoPerico>(comando.IdHuevoPerico);
         _ = huevoPericoStream.CargarEntidad();
         
-        huevoPericoStream.Agregar(new HuevosPericosIniciados(comando.IdHuevoPerico));
+        huevoPericoStream.Agregar(new HuevosPericosIniciados(comando.IdHuevoPerico, comando.IdOrden));
     }
 }

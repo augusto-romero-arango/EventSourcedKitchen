@@ -12,12 +12,12 @@ public class BatirHuevosTest : CommandHandlerTest<BatirHuevos>
     public void HuevosFueronBatidos()
     {
 
-        Given(new HuevosPericosIniciados(IdAgregado));
+        Given(new HuevosPericosIniciados(IdAgregado, Guid.NewGuid()));
         When(new BatirHuevos(IdAgregado, 3));
         Then(new HuevosBatidos(IdAgregado, 3));
         
         var huevoPerico = ObtenerHuevoPerico();
-        huevoPerico.CantidadIngredientes(Ingredientes.Huevos).Should().Be(2);
+        huevoPerico.CantidadIngredientes(Ingredientes.Huevos).Should().Be(3);
     }
 
     private HuevoPerico ObtenerHuevoPerico()

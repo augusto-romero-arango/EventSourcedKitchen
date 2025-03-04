@@ -11,7 +11,7 @@ public class PicarCebollaTest : CommandHandlerTest<PicarCebolla>
     [Fact]
     public void CebollaPicada()
     {
-        Given(new HuevosPericosIniciados(IdAgregado));
+        Given(new HuevosPericosIniciados(IdAgregado, Guid.NewGuid()));
         When(new PicarCebolla(IdAgregado, 1));
         Then(new CebollaPicada(IdAgregado, 1));
     }

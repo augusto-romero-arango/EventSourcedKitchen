@@ -14,7 +14,7 @@ public class CocinarHuevoPericoTest : CommandHandlerTest<CocinarHuevoPerico>
     {
         var idOrden = Guid.NewGuid();
         When(new CocinarHuevoPerico(IdAgregado, idOrden));
-        Then(new HuevosPericosIniciados(IdAgregado));
+        Then(new HuevosPericosIniciados(IdAgregado, idOrden));
         
         
     }
