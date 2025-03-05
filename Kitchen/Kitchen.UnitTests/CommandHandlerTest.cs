@@ -60,6 +60,19 @@ public abstract class CommandHandlerTest<TComando>
             }
         }
     }
+
+    protected TEntidad ObtenerEntidad<TEntidad>()
+        where TEntidad : AggregateRoot, new()
+    {
+        return ObtenerEntidad<TEntidad>(IdAgregado);
+    } 
+    
+    protected TEntidad ObtenerEntidad<TEntidad>(Guid idAgregado) 
+        where TEntidad : AggregateRoot, new()
+    {
+        var stream = new EventStream<TEntidad>(EventStore, idAgregado);
+        return stream.CargarEntidad();
+    }
     
     
    

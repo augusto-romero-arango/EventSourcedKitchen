@@ -6,9 +6,8 @@ public class CocinarHuevoPericoHandler(IEventStore eventStore) : CommandHandler<
 {
     public override void Handle(CocinarHuevoPerico comando)
     {
-        var huevoPericoStream = ObtenerStream<HuevoPerico>(comando.IdHuevoPerico);
-        _ = huevoPericoStream.CargarEntidad();
+        var stream = ObtenerStream<HuevoPerico>(comando.IdHuevoPerico);
         
-        huevoPericoStream.Agregar(new HuevosPericosIniciados(comando.IdHuevoPerico, comando.IdOrden));
+        stream.Agregar(new HuevosPericosIniciados(comando.IdHuevoPerico, comando.IdOrden));
     }
 }

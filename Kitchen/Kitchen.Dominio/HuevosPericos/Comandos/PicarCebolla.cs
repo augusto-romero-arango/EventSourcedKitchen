@@ -5,9 +5,9 @@ public class PicarCebollaHandler(IEventStore eventStore) : CommandHandler<PicarC
 {
     public override void Handle(PicarCebolla comando)
     {
-        var huevoPericoStream = ObtenerStream<HuevoPerico>(comando.IdHuevoPerico);
-        _ = huevoPericoStream.CargarEntidad();
-        huevoPericoStream.Agregar(new CebollaPicada(comando.IdHuevoPerico,comando.CantidadCebolla));
+        var stream = ObtenerStream<HuevoPerico>(comando.IdHuevoPerico);
+        _ = stream.CargarEntidad();
+        stream.Agregar(new CebollaPicada(comando.CantidadCebolla));
     }
 }
 
