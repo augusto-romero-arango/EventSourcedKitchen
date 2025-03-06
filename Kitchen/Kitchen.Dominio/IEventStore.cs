@@ -2,7 +2,7 @@
 
 public interface IEventStore
 {
-    IEnumerable<StoredEvent> ObtenerEventos(Guid aggregateId);
+    IEnumerable<StoredEvent> ObtenerEventos(Guid idAgregado);
     void AgregarEvento(StoredEvent evento);
     void GuardarCambios();
 }
