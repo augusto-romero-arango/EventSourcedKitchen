@@ -6,7 +6,7 @@ Ejemplo con C# y event sourcing
 
 [MIRO](https://miro.com/app/board/uXjVIWSuopc=/?share_link_id=671970103168)
 
-![EventStorming de la cocina](Assets\img\eventStorming.png)
+![EventStorming de la cocina](Assets/img/eventStorming.png)
 
 Tenemos la solución para hacer una cocina. En este momento, el único producto que hacemos el preparar huevos pericos.
 
