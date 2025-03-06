@@ -104,7 +104,7 @@ public abstract class CommandHandlerTest<TComando>
     /// <typeparam name="TEntidad">Entidad que herede de AgreggateRoot.</typeparam>
     /// <param name="idAgregado">El id del agregado que se desea recuperar.</param>
     /// <returns>Entidad con el estado posterior a la aplciación de los eventos registrados.</returns>
-  protected TEntidad ObtenerEntidad<TEntidad>(Guid idAgregado) 
+    protected TEntidad ObtenerEntidad<TEntidad>(Guid idAgregado) 
         where TEntidad : AggregateRoot, new()
     {
         var stream = new EventStream<TEntidad>(EventStore, idAgregado);

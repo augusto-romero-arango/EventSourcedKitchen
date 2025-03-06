@@ -5,7 +5,8 @@ Ejemplo con C# y event sourcing
 ## Cocinita: Contexto del ejercicio
 
 [MIRO](https://miro.com/app/board/uXjVIWSuopc=/?share_link_id=671970103168)
-![EventStorming de la cocina](Assets/img/eventStorming.png)
+
+![EventStorming de la cocina](Assets\img\eventStorming.png)
 
 Tenemos la solución para hacer una cocina. En este momento, el único producto que hacemos el preparar huevos pericos.
 
@@ -60,3 +61,55 @@ Nuestro agregado será el que adminsitra el evento.
 - Creamos una carpeta para el agregado en plural: `HuevosPericos`
 - Creamos la clase del agregado en singular: `HuevoPerico`
   
+## 2. Pruebas unitarias del dominio
+
+### 2.1 Alcance de las pruebas (Suftware Under Test - SUT)
+
+Como la lógica del dominio está principalmente en los `handlers` se va a construir un wrapper para poder hacer las pruebas unitarias al rededor de los eventos previos y los eventos que se generan gracias cuando se ejecute el handler.
+
+### 2.2 TestEventStore
+
+Creamos una clase que herede de `IEventStore` con el fin de hacer un mock del almacenamiento con una implementación en memoria.
+
+Internamente creamos dos colecciones de `StoredEvent` uno para las precondiciones y otra para los resultados.
+
+#### EventosPasados
+
+La colección `_eventosPasados` representan todos los eventos que registramos en el test que sucedieron antes de ejecutar el SUT.
+
+#### EventosGenerados
+
+La colección `_eventosGenerados` representan los eventos que se crearon después de la ejecucuión del `handler`.
+Servirán para acertar los eventos creados por el handler.
+
+### 2.3 CommandHandlerTest
+
+`CommandHandlerTest` es una clase abstracta que heredarán los tests de dominio para los eventos.
+
+Esta clase accede a `TestEventStore` para inyectar el storeEvent en memoria que es usado para las pruebas unitarias.
+
+Inspierado en [Gherkin](https://cucumber.io/docs/gherkin/reference), se crean tres métodos: `Given`, `When` , `Then`.
+
+La intención es declarar las pruebas en una sintaxis parecida a:
+
+**Dado que (Given)** Los huevos han sido batidos
+
+**Cuando (When)** voy a salar los huevos
+
+**Entonces (Then)** los huevos fueron salados
+
+
+#### Given
+
+En español "Dado que". Representará el registro de los eventos anteriores que asumimos para la prueba fueron aplicados antes que corra el handler que vamos a correr.
+
+**La lista de eventos debe ser registrada en orden cronológcio.**
+
+#### When
+
+En español "Cuando". Ejecutará el comando pasándolo al `Handler` que haya sido instanciado en la prueba.
+
+#### Then
+
+En español "Entonces". Validará cada uno de los eventos que el handler emitirá en el orden estricto y comparará cada una de sus propiedades.
+

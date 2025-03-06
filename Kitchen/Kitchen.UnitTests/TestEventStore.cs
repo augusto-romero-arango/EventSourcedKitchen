@@ -4,8 +4,8 @@ namespace Kitchen.UnitTests;
 
 public class TestEventStore : IEventStore
 {
-    private readonly List<StoredEvent> _anterioresEventos = new();
-    private readonly List<StoredEvent> _nuevosEventos = new();
+    private readonly List<StoredEvent> _eventosPasados = new();
+    private readonly List<StoredEvent> _eventosGenerados = new();
 
     /// <summary>
     /// Registrar los eventos ordenados que han sido aplicados antes de la creación de la entidad.
@@ -14,7 +14,7 @@ public class TestEventStore : IEventStore
     /// <param name="eventos">Listado de eventos ordenados que serán aplicados a al entidad antes de ejecutar el SUT.</param>
     public void  AgregarEventosAnteriores(Guid idAgregado, params object[] eventos)
     {
-        _anterioresEventos
+        _eventosPasados
             .AddRange(
                 eventos.Select((evento, i) => new StoredEvent(idAgregado, i, DateTime.UtcNow, evento))
             );
@@ -27,7 +27,7 @@ public class TestEventStore : IEventStore
     /// <returns>Retorna los eventos registrados en el eventStore posteriores a la ejecución del SUT.</returns>
     public object[] ObtenerEventosGenerados(Guid idAgregado)
     {
-        return _nuevosEventos
+        return _eventosGenerados
             .Where(e => e .AggregateId== idAgregado)
             .OrderBy(e => e.SequenceNumber)
             .Select(e => e.EventData)
@@ -41,7 +41,7 @@ public class TestEventStore : IEventStore
     /// <returns></returns>
     public IEnumerable<StoredEvent> ObtenerEventos(Guid idAgregado)
     {
-        var eventos = _anterioresEventos.Concat(_nuevosEventos);
+        var eventos = _eventosPasados.Concat(_eventosGenerados);
         return eventos
             .Where(e => e.AggregateId == idAgregado)
             .ToList();
@@ -53,7 +53,7 @@ public class TestEventStore : IEventStore
     /// <param name="evento">Evento a aplicar a la entidad</param>
     public void AgregarEvento(StoredEvent evento)
     {
-        _nuevosEventos.Add(evento);
+        _eventosGenerados.Add(evento);
     }
 
     /// <summary>
